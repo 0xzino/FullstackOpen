@@ -3,17 +3,20 @@ sequenceDiagram
     participant browser
     participant server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    Note right of browser: User inputs into the text field and clicks on the save button
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new-note  (note=I+love+men)
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
-    server-->>browser: spa - HTML Document
+    server-->>browser: notes.html  - HTML Document
     deactivate server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
     server-->>browser: main.css  - CSS Document
     deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
     server-->>browser: main.js - Javascript Document
     deactivate server
@@ -22,7 +25,7 @@ sequenceDiagram
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ...]
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... + {"content": "I love men", "date": 2026/4/7" }]
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/favicon.ico
